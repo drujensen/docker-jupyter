@@ -2,6 +2,9 @@ version: '2'
 services:
   server:
     image: drujensen/jupyter
+    environment:
+      - "GRANT_SUDO=yes"
+    user: root
     ports:
       - "8888:8888"
     volumes:

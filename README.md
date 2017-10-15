@@ -91,3 +91,23 @@ dc down
 ## Docker Commands
 
 You can also use any `docker` command if you prefer that over `docker-compose`. 
+
+## NVidia Driver
+
+### Install CUDA on host server
+On the host server:
+```bash
+wget -O - -q 'https://gist.githubusercontent.com/allenday/f426e0f146d86bfc3dada06eda55e123/raw/41b6d3bc8ab2dfe1e1d09135851c8f11b8dc8db3/install-cuda.sh' | sudo bash
+
+nvidia-smi
+```
+
+### Verify plugin on docker image
+```bash
+dc exec server bash
+```
+
+Now that you are inside the docker container, try:
+```bash
+sudo nvidia-docker-plugin &
+```

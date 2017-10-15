@@ -1,7 +1,6 @@
 version: '2'
 services:
   server:
-    build: .
     image: drujensen/jupyter
     ports:
       - "8888:8888"

@@ -53,9 +53,14 @@ dm scp [machine:][path] machine:][path]
 
 ## Docker Compose commands
 
-### Setup environment to point to EC2 instance
+### Use EC2 instance
 ```bash
 eval $(dm env jupyter)
+```
+
+### Verify its active
+```bash
+dm ls
 ```
 
 ### Build

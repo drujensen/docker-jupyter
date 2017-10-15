@@ -2,7 +2,7 @@ version: '2'
 services:
   server:
     build: .
-    image: jupyter
+    image: drujensen/jupyter
     ports:
       - "8888:8888"
     volumes:

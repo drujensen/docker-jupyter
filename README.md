@@ -63,11 +63,6 @@ eval $(dm env jupyter)
 dm ls
 ```
 
-### Build
-```bash
-dc build server
-```
-
 ### Bring Up
 ```bash
 dc up -d

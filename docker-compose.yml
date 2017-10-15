@@ -2,8 +2,8 @@ version: '2'
 services:
   server:
     build: .
-    image: drujensen/jupyter
+    image: jupyter
     ports:
       - "8888:8888"
     volumes:
-      - ".:/home/jovyan"
+      - "/home/ubuntu:/home/jovyan"

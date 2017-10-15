@@ -2,4 +2,5 @@
 /.config
 /.iphython
 /.keras
+/.theano
 **/data

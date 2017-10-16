@@ -2,6 +2,12 @@ FROM jupyter/datascience-notebook
 
 MAINTAINER Dru Jensen <drujensen@gmail.com>
 
+USER root
+
+ENV GRANT_SUDO=yes
+
+RUN sudo apt-get -y update
+
 RUN sudo apt-get install -y --no-install-recommends apt-transport-https ca-certificates curl software-properties-common
 
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - 

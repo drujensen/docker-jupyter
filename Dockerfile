@@ -1,4 +1,4 @@
-FROM jupyter/datascience-notebook
+FROM gcr.io/tensorflow/tensorflow:latest-gpu
 
 MAINTAINER Dru Jensen <drujensen@gmail.com>
 
@@ -20,10 +20,6 @@ RUN sudo add-apt-repository \
 RUN sudo apt-get -y update
 
 RUN sudo apt-get -y --no-install-recommends install docker-ce
-
-RUN wget https://github.com/NVIDIA/nvidia-docker/releases/download/v1.0.1/nvidia-docker_1.0.1-1_amd64.deb
-
-RUN sudo dpkg -i nvidia-docker*.deb
 
 RUN pip install bcolz
 

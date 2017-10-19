@@ -71,7 +71,8 @@ nvidia-smi
 
 Run Jupyter using docker on the host machine
 ```
-nvidia-docker run --rm --name tf1 -p 8888:8888 -p 6006:6006 drujensen/jupyter jupyter notebook --allow-root
+nvidia-docker-plugin &
+nvidia-docker run --rm --name jupyter -p 8888:8888 -p 6006:6006 drujensen/jupyter --allow-root
 ```
 
 Watch logs and grab URL to open

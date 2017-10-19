@@ -66,14 +66,21 @@ wget -O - -q 'https://gist.githubusercontent.com/allenday/f426e0f146d86bfc3dada0
 
 Verify Cuda is properly setup and GPU is working
 ```bash
-nvidia-smi
+sudo nvidia-smi
 ```
 
-Run Jupyter using docker on the host machine
+Run nvidia plugin:
 ```
-nvidia-docker-plugin &
-nvidia-docker run --rm --name jupyter -p 8888:8888 -p 6006:6006 drujensen/jupyter
+sudo nvidia-docker-plugin &
+```
+
+Run Jupyter using docker:
+```
+sudo nvidia-docker run --rm -d --name jupyter -p 8888:8888 -p 6006:6006 -v /home/ubuntu/notebooks:/notebooks drujensen/jupyter jupyter notebook --allow-root
 ```
 
 Watch logs and grab URL to open
+```
+sudo docker logs jupyter
+```
 

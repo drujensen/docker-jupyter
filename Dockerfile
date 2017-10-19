@@ -8,8 +8,8 @@ ENV GRANT_SUDO=yes
 
 RUN apt-get -y update
 
-#RUN pip install bcolz
+RUN pip install bcolz
 
-#RUN conda install -c conda-forge theano pygpu keras tensorflow
+RUN conda install -c conda-forge theano pygpu keras tensorflow
 
 CMD jupyter notebook --allow-root

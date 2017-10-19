@@ -12,4 +12,4 @@ RUN apt-get -y update
 
 #RUN conda install -c conda-forge theano pygpu keras tensorflow
 
-CMD jupyter notebook
+CMD jupyter notebook --allow-root

@@ -76,7 +76,7 @@ sudo nvidia-docker-plugin &
 
 Run Jupyter using docker:
 ```
-sudo nvidia-docker run --rm -d --name jupyter -p 8888:8888 -p 6006:6006 -v /home/ubuntu/notebooks:/notebooks drujensen/jupyter jupyter notebook --allow-root
+sudo nvidia-docker run --rm -d --name jupyter -p 8888:8888 -p 6006:6006 -v /home/ubuntu/notebooks:/notebooks drujensen/jupyter
 ```
 
 Watch logs and grab URL to open

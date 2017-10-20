@@ -10,6 +10,6 @@ RUN apt-get -y update
 
 RUN pip install bcolz
 
-RUN pip install keras tensorflow
+RUN pip install keras theano tensorflow
 
 CMD jupyter notebook --allow-root

@@ -1,0 +1,11 @@
+version: '2'
+
+services:
+  jupyter:
+    build: .
+    image: drujensen/jupyter
+    ports:
+      - "8888:8888"
+      - "6006:6006"
+    volumes:
+      - "./notebooks:/home/jovyan/work"

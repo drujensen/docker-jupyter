@@ -1,5 +1,20 @@
 # Jupyter using Docker
 
+## Start Server
+```bash
+dc up -d
+```
+
+## Find Jupyter URL
+```bash
+dc logs
+```
+
+Look for URL and open in browser
+
+
+# Jupyter using Docker with GPU
+
 ## Setup
 Install docker for your environment:
 https://www.docker.com/community-edition#/download

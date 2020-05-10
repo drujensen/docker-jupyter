@@ -1,6 +1,4 @@
-FROM gcr.io/tensorflow/tensorflow:latest-gpu
-
-MAINTAINER Dru Jensen <drujensen@gmail.com>
+FROM jupyter/tensorflow-notebook
 
 USER root
 
@@ -10,6 +8,8 @@ RUN apt-get -y update
 
 RUN pip install bcolz
 
-RUN pip install keras theano tensorflow
+RUN pip install --quiet keras theano
 
 CMD jupyter notebook --allow-root
+
+USER $NB_UID

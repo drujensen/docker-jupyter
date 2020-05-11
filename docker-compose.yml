@@ -3,9 +3,8 @@ version: '2'
 services:
   jupyter:
     build: .
-    image: drujensen/jupyter
+    image: drujensen/jupyter:latest
     ports:
       - "8888:8888"
-      - "6006:6006"
     volumes:
-      - "./notebooks:/home/jovyan/work"
+      - "/Users/drujensen/workspace/python/course-v3:/home/jovyan/work"

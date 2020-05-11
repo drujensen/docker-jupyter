@@ -1,15 +1,9 @@
 FROM jupyter/tensorflow-notebook
 
-USER root
-
+USER $NB_UID
 ENV GRANT_SUDO=yes
 
-RUN apt-get -y update
-
-RUN pip install bcolz
-
-RUN pip install --quiet keras theano
+RUN pip install "torch==1.4" "torchvision==0.5.0"
+RUN pip install --quiet fastai
 
 CMD jupyter notebook --allow-root
-
-USER $NB_UID

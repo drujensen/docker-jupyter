@@ -29,32 +29,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
          wget \
          vim \
          ca-certificates \
-         python-qt4 \
          libjpeg-dev \
          zip \
          unzip \
-         libpng-dev
+         libpng-dev \
+         python3 \
+         python3-dev \
+         python3-pip \
+         python3-setuptools
 
 ENV LD_LIBRARY_PATH /usr/local/nvidia/lib:/usr/local/nvidia/lib64
-
-#################################################################################################################
-#           CONDA
-#################################################################################################################
-
-ENV PATH /opt/conda/bin:$PATH
-
-RUN apt-get update --fix-missing && \
-    apt-get install -y wget bzip2 ca-certificates curl git && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
-RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-4.5.11-Linux-x86_64.sh -O ~/miniconda.sh && \
-    /bin/bash ~/miniconda.sh -b -p /opt/conda && \
-    rm ~/miniconda.sh && \
-    /opt/conda/bin/conda clean -tipsy && \
-    ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
-    echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
-    echo "conda activate base" >> ~/.bashrc
 
 #################################################################################################################
 #           TINI
@@ -65,39 +49,15 @@ ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /usr/
 RUN chmod +x /usr/bin/tini
 
 #################################################################################################################
-#           FASTAI ENV
+#           FASTAI
 #################################################################################################################
 
 # update fastai version as required
 ARG FASTAI_VERSION=1.0.61
 RUN git clone --single-branch --branch $FASTAI_VERSION https://github.com/fastai/fastai.git /usr/local/fastai
 
-# set pytorch cuda package to match image cuda version.
-# RUN sed -i -e 's/cuda90/cuda102/' /usr/local/fastai/environment.yml
-# set cudatoolkit package to match image cuda version.
-# RUN sed -i -e '/dependencies:/a - cudatoolkit==10.2' /usr/local/fastai/environment.yml
-
 # install fastai environment
-RUN cd /usr/local/fastai && conda env update -f environment.yml
-
-RUN conda install -n fastai -c fastai -c pytorch \
-            fastai==$FASTAI_VERSION \
-            fastprogress
-
-# pip installs
-RUN /opt/conda/envs/fastai/bin/pip install \
-            pandas-summary==0.0.6
-
-#################################################################################################################
-#           OTHER PACKAGES
-#################################################################################################################
-
-RUN conda install -n fastai \
-            scikit-learn
-
-# pip installs
-RUN /opt/conda/envs/fastai/bin/pip install \
-            isoweek
+RUN cd /usr/local/fastai && pip3 install -e .
 
 #################################################################################################################
 #           JUPYTER
@@ -123,8 +83,7 @@ EXPOSE 8888
 # have to be downloaded again if you reinstall them.
 
 RUN apt-get autoremove -y && apt-get clean && \
-    rm -rf /var/lib/apt/lists/* && \
-    conda clean -i -l -t -y
+    rm -rf /var/lib/apt/lists/*
 
 #################################################################################################################
 #           START UP

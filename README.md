@@ -36,6 +36,10 @@ alias dc="docker-compose"
 dm create --driver=amazonec2 --amazonec2-region us-west-2 --amazonec2-instance-type p2.xlarge jupyter
 ```
 
+Or follow these instructions to install docker on your own instance:
+
+https://docs.docker.com/engine/install/ubuntu/
+
 ### List
 ```bash
 dm ls
@@ -76,26 +80,25 @@ dm ssh jupyter
 
 On the host server:
 ```bash
-wget -O - -q 'https://gist.githubusercontent.com/allenday/f426e0f146d86bfc3dada06eda55e123/raw/41b6d3bc8ab2dfe1e1d09135851c8f11b8dc8db3/install-cuda.sh' | sudo bash
+distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
+curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+
+sudo apt-get update && sudo apt-get install -y nvidia-container-toolkit
+sudo systemctl restart docker
 ```
 
 Verify Cuda is properly setup and GPU is working
 ```bash
-sudo nvidia-smi
-```
-
-Run nvidia plugin:
-```
-sudo nvidia-docker-plugin &
+sudo docker run --gpus all nvidia/cuda:10.0-base nvidia-smi
 ```
 
 Run Jupyter using docker:
 ```
-sudo nvidia-docker run --rm -d --name jupyter -p 8888:8888 -p 6006:6006 -v /home/ubuntu/notebooks:/notebooks drujensen/jupyter
+sudo docker run --rm -d --gpus all --name jupyter -p 8888:8888 -v /home/ubuntu/notebooks:/home/jovyan/work drujensen/jupyter:latest
 ```
 
 Watch logs and grab URL to open
 ```
 sudo docker logs jupyter
 ```
-
